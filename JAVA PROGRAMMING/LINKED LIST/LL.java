@@ -6,6 +6,20 @@ public class LL {
     public LL(){
         this.size=0;
     }
+    public void recursive_insertion(int val ,int idx){
+        this.head =recursive_insertion(val,idx,this.head);
+    }
+    private Node recursive_insertion(int val,int idx ,Node head){
+        if(idx==0){
+            Node temp =new Node(val);
+            temp.next=head;
+            this.size++;
+            return temp;
+        }
+        Node returned = recursive_insertion(val,idx-1,head.next);
+        head.next =returned;
+        return head;
+    }
     public void insertFirst(int val){
         Node temp= new Node(val);
         if (this.head==null){
