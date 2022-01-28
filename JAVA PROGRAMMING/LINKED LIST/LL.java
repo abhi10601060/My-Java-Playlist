@@ -133,8 +133,52 @@ public class LL {
         System.out.print("END");
         System.out.println();
     }
-    public void getSize(){
-        System.out.println(this.size);
+    public int getSize(){
+        return this.size;
+    }
+
+    public boolean isCycle(){
+        if (this.size==0){
+            return false;
+        }
+        Node s=this.head;
+        Node f=this.head;
+        while(f.next!=null && f!=null){
+            s=s.next;
+            f=f.next.next;
+            if (f==s){
+                return true;
+            }
+        }
+        return false;
+    }
+    public void recursiveReverse(){
+        this.tail= recursiveReverse(this.head);
+    }
+    private Node recursiveReverse(Node head){
+        if (head.next==null){
+            this.head=head;
+            return head;
+        }
+        Node returned= recursiveReverse(head.next);
+        returned.next=head;
+        head.next=null;
+        return head;
+    }
+    public void iterativeReverse(){
+        this.head=iterativeReverse(this.head);
+    }
+
+    private Node iterativeReverse(Node head) {
+        Node pre=null;
+        Node cur=head;
+        while (cur!=null){
+            Node next_cur=cur.next;
+            cur.next=pre;
+            pre=cur;
+            cur=next_cur;
+        }
+        return pre;
     }
 
     private class Node{
